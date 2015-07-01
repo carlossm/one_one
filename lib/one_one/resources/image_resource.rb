@@ -15,8 +15,13 @@ module OneOne
         handler(200) do |response|
           ServerMapping.extract_single(response.body, :read)
         end
+      end
 
-        handler(404) { |_| nil }
+      # TODO create
+      action :create, 'POST /v1/images' do
+        handler(200) do |response|
+          ServerMapping.extract_single(response.body, :read)
+        end
       end
     end
   end

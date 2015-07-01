@@ -3,7 +3,8 @@ require 'one_one'
 require 'pry'
 
 # create a client
-client = OneOne::Client.new(token: '337c0f24c0e0f66d18bae948570f1f75')
+# TODO: revoke the token, checked it in.
+client = OneOne::Client.new(token: ARGV.shift)
 
 # list all servers
 servers = client.servers.all
@@ -13,11 +14,22 @@ servers.each do |s|
 end
 
 # List all available images
-puts 'Here are all the images you can use to launch'
+puts "\nHere are all the images you can use to launch"
 images = client.images.all
 puts "You have #{images.length} images to choose from"
+#
+# List all available server appliances
+puts "\nHere are all the server appliances you can use to launch"
+appliances = client.server_appliances.all
+puts "You have #{appliances.length} appliances to choose from"
+
+# firewall policies
+puts "\nHere are all your policies master"
+policies = client.firewall_policies.all
+puts "You have #{policies.length} policies to choose from"
 
 # Create a server
+puts "\nCreate a server"
 
 # Delete the server we just created
 #

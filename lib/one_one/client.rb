@@ -24,7 +24,9 @@ module OneOne
     def self.resources
       {
         servers: ServerResource,
-        images: ImageResource
+        images: ImageResource,
+        server_appliances: ServerApplianceResource,
+        firewall_policies: FirewallPolicyResource
       }
     end
 
