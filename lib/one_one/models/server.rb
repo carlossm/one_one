@@ -2,6 +2,7 @@ module OneOne
   class Server < Base
     attribute :id
     attribute :name
+    attribute :description
     attribute :first_password
     attribute :status
     attribute :hardware

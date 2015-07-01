@@ -17,9 +17,9 @@ module OneOne
         end
       end
 
-      action :create, 'POST /v1/servers/:id' do
+      action :create, 'POST /v1/servers' do
         body { |object| ServerMapping.representation_for(:create, object) }
-        handler(200) do |response|
+        handler(202) do |response|
           ServerMapping.extract_single(response.body, :read)
         end
       end

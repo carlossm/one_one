@@ -6,6 +6,7 @@ module OneOne
       mapping Server
 
       property :id, scopes: [:read]
+      property :description, scopes: [:read, :create]
       property :name, scopes: [:read, :create]
       property :first_password, scopes: [:read]
       property :status, scopes: [:read]
