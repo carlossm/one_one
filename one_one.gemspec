@@ -9,9 +9,9 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Connor Atherton"]
   spec.email         = ["connor@bitnami.com"]
 
-  spec.summary       = %q{TODO: Write a short summary, because Rubygems requires one.}
-  spec.description   = %q{TODO: Write a longer description or delete this line.}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.summary       = %q{A client library for the 1and1 cloud api}
+  spec.description   = %q{A client library for the 1and1 cloud api}
+  spec.homepage      = "https://github.com/ConnorAtherton/one_one"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
