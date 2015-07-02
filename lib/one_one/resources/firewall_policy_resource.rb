@@ -1,7 +1,11 @@
 module OneOne
-  class FirewallPolicyResource < ResourceKit::Resource
+  class FirewallPolicyResource < BaseResource
     resources do
-      action :all, 'GET /api/v1/firewall_policies' do
+      default_handler do |response|
+        fail "Unexpected response status #{response.status}... #{response.body}"
+      end
+
+      action :all, 'GET /v1/firewall_policies' do
         handler(200) do |response|
           FirewallPolicyMapping.extract_collection(response.body, :read)
         end

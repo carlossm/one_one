@@ -1,5 +1,5 @@
 module OneOne
-  class ImageResource < ResourceKit::Resource
+  class ImageResource < BaseResource
     resources do
       default_handler do |response|
         fail "Unexpected response status #{response.status}... #{response.body}"

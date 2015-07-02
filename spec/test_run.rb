@@ -28,6 +28,16 @@ puts "\nHere are all your policies master"
 policies = client.firewall_policies.all
 puts "You have #{policies.length} policies to choose from"
 
+# Instance types
+puts "\nList of instance types"
+instance_types = client.servers.instance_types
+puts "You have #{instance_types.length} instance types to choose from"
+
+instance_types.each do |it|
+  pp it
+  puts "\n -- \n"
+end
+
 # Create a server
 # puts "\nCreate a server"
 # server = OneOne::Server.new(

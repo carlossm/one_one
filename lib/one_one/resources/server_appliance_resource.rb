@@ -1,5 +1,5 @@
 module OneOne
-  class ServerApplianceResource < ResourceKit::Resource
+  class ServerApplianceResource < BaseResource
     resources do
       default_handler do |response|
         fail "Unexpected response status #{response.status}... #{response.body}"
