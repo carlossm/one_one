@@ -7,6 +7,8 @@ client = OneOne::Client.new(token: ARGV.shift)
 
 # list all servers
 servers = client.servers.all
+server  = nil
+
 puts "You have #{servers.length} servers"
 servers.each do |s|
   puts ' - ' << s.name
@@ -39,39 +41,42 @@ instance_types.each do |it|
 end
 
 # Create a server
-# puts "\nCreate a server"
-# server = OneOne::Server.new(
-#   name: 'connor-test',
-#   description: 'creating a server right now',
-#   appliance_id: client.server_appliances.all.first.id,
-#   #
-#   # One of these object represents instance types
-#   #
-#   hardware: {
-#     'vcore' => 2,
-#     'cores_per_processor' => 1,
-#     'ram' => 2,
-#     'hdds' => [
-#       {
-#         'size' => 40,
-#         'is_main' => true
-#       },
-#       {
-#         'size' => 20,
-#         'is_main' => false
-#       }
-#     ]
-#   }
-# )
+puts "\nCreate a server if none present"
+unless servers.length > 0
+  puts "\n-> None present"
 
-# server = client.servers.create(server)
+  server = OneOne::Server.new(
+    name: 'connor-test',
+    description: 'creating a server right now',
+    appliance_id: client.server_appliances.all.first.id,
+    hardware: instance_types.first.hardware
+  )
 
-# sleep 10
+  server = client.servers.create(server)
+end
 
-# puts server.id
+server ||= servers.first
 
-# list all servers again
-# servers = client.servers.all
-# puts "You have #{servers.length} servers"
+loop do
+  server = client.servers.find(id: server.id)
+  pp server
 
-# Delete the server we just created
+  # client.servers.power_on(id: server.id)
+  # client.servers.power_off(id: server.id)
+
+  # ensure server is powered off
+  intermediate = %w(DEPLOYING REMOVING POWERING_OFF POWERING_ON)
+  until (server = client.servers.find(id: server.id)).status['state'] == 'POWERED_OFF'
+    puts "[STATE] - #{server.status['state']}"
+    unless intermediate.include? server.status['state']
+      client.servers.power_off(id: server.id)
+    end
+
+    sleep 5
+  end
+  puts "[STATE] - #{server.status['state']}"
+
+  client.servers.delete(id: server.id)
+  puts '[STATE] - server deleted'
+  break
+end
