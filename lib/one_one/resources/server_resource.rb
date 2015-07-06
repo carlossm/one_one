@@ -43,10 +43,6 @@ module OneOne
           handler(200, 202) do |response|
             ServerMapping.extract_single(response.body, :read)
           end
-
-          # handler(202) do |response|
-          #   ServerMapping.extract_single(response.body, :read)
-          # end
         end
       end
 

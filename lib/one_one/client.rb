@@ -47,7 +47,6 @@ module OneOne
 
     def token_valid?
       res = connection.get('/v1/')
-      binding.pry
     end
 
     private
