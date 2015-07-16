@@ -1,7 +1,7 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'one_one/version'
+require 'one_one'
 
 Gem::Specification.new do |spec|
   spec.name          = "one_one"
@@ -27,5 +27,4 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'kartograph'
   spec.add_dependency 'virtus'
   spec.add_dependency 'resource_kit'
-  spec.add_dependency 'activesupport'
 end

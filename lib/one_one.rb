@@ -1,7 +1,6 @@
 require 'one_one/version'
 require 'resource_kit'
 require 'kartograph'
-require 'active_support/all'
 
 module OneOne
   # client

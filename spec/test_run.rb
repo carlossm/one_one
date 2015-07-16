@@ -1,5 +1,6 @@
 require 'bundler/setup'
 require 'one_one'
+require 'securerandom'
 require 'pry'
 
 # create a client
@@ -39,6 +40,28 @@ instance_types.each do |it|
   pp it
   puts "\n -- \n"
 end
+
+puts "\n Create a firewall policy"
+policy = OneOne::FirewallPolicy.new(
+  name: "connor_test-#{SecureRandom.hex(5)}",
+  description: "connor_test-#{SecureRandom.hex(5)}",
+  rules: [
+    {
+      protocol: 'TCP',
+      port_from: 80,
+      port_to: 80,
+      source: '0.0.0.0'
+    },
+    {
+      protocol: 'TCP',
+      port_from: 443,
+      port_to: 443,
+      source: '0.0.0.0'
+    }
+  ]
+)
+
+fp = client.firewall_policies.create(policy)
 
 # Create a server
 puts "\nCreate a server if none present"
