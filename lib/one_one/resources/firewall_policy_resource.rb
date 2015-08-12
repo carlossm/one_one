@@ -18,7 +18,19 @@ module OneOne
       end
 
       action :create, 'POST /v1/firewall_policies/' do
-        body { |object| FirewallPolicyMapping.representation_for(:create, object) }
+        body do |object|
+          FirewallPolicyMapping.representation_for(:create, object)
+        end
+
+        handler(202) do |response|
+          FirewallPolicyMapping.extract_single(response.body, :read)
+        end
+      end
+
+      action :assign, 'POST /v1/firewall_policies/:id/server_ips' do
+        # assume the object is correctly formatted for now
+        # { server_ips: ["id1", "id2"] }
+        body { |object| object }
         handler(202) do |response|
           FirewallPolicyMapping.extract_single(response.body, :read)
         end
