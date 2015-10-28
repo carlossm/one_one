@@ -13,7 +13,7 @@ module OneOne
 
       action :find, 'GET /v1/firewall_policies/:id' do
         handler(200) do |response|
-          FirewallPolicyMapping.extract_collection(response.body, :read)
+          FirewallPolicyMapping.extract_single(response.body, :read)
         end
       end
 
@@ -30,7 +30,7 @@ module OneOne
       action :assign, 'POST /v1/firewall_policies/:id/server_ips' do
         # assume the object is correctly formatted for now
         # { server_ips: ["id1", "id2"] }
-        body { |object| object }
+        body { |object| object.to_json }
         handler(202) do |response|
           FirewallPolicyMapping.extract_single(response.body, :read)
         end

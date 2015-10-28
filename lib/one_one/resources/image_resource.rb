@@ -13,14 +13,15 @@ module OneOne
 
       action :find, 'GET /v1/images/:id' do
         handler(200) do |response|
-          ServerMapping.extract_single(response.body, :read)
+          ImageMapping.extract_single(response.body, :read)
         end
       end
 
       # TODO create
       action :create, 'POST /v1/images' do
-        handler(200) do |response|
-          ServerMapping.extract_single(response.body, :read)
+        body { |object| object.to_json }
+        handler(202) do |response|
+          ImageMapping.extract_single(response.body, :read)
         end
       end
     end
