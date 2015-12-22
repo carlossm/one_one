@@ -10,5 +10,7 @@ module OneOne
     attribute :ips
     attribute :description
     attribute :appliance_id
+
+    attribute :password
   end
 end

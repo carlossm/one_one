@@ -14,6 +14,8 @@ module OneOne
       property :creation_date, scopes: [:read]
       property :appliance_id, scopes: [:read, :create]
       property :ips, scopes: [:read]
+
+      property :password, scopes: [:create]
     end
   end
 end
