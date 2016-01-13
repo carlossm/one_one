@@ -1,10 +1,8 @@
 module OneOne
   class ServerApplianceResource < BaseResource
-    resources do
-      default_handler do |response|
-        fail "Unexpected response status #{response.status}... #{response.body}"
-      end
+    include ErrorHandler
 
+    resources do
       action :all, 'GET /v1/server_appliances' do
         handler(200) do |response|
           ServerApplianceMapping.extract_collection(response.body, :read)

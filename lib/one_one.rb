@@ -27,4 +27,8 @@ module OneOne
   autoload :ImageResource, 'one_one/resources/image_resource'
   autoload :ServerApplianceResource, 'one_one/resources/server_appliance_resource'
   autoload :FirewallPolicyResource, 'one_one/resources/firewall_policy_resource'
+
+  # errors
+  autoload :ErrorHandler, 'one_one/error_handler'
+  autoload :Error, 'one_one/error'
 end

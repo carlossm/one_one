@@ -1,11 +1,9 @@
 module OneOne
   class ServerResource < BaseResource
+    include ErrorHandler
+
     resources do
       ACTION_HANDLERS = %w(power_on power_off reboot)
-
-      default_handler do |response|
-        fail "Unexpected response status #{response.status}... #{response.body}"
-      end
 
       action :all, 'GET /v1/servers' do
         handler(200) do |response|
