@@ -25,6 +25,12 @@ module OneOne
         end
       end
 
+      action :delete, 'DELETE /v1/firewall_policies/:id' do
+        handler(202) do |response|
+          FirewallPolicyMapping.extract_single(response.body, :read)
+        end
+      end
+
       action :assign, 'POST /v1/firewall_policies/:id/server_ips' do
         # assume the object is correctly formatted for now
         # { server_ips: ["id1", "id2"] }
