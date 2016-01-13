@@ -29,6 +29,12 @@ module OneOne
           ImageMapping.extract_single(response.body, :read)
         end
       end
+
+      action :delete, 'DELETE /v1/images/:id' do
+        handler(202) do |response|
+          ImageMapping.extract_single(response.body, :read)
+        end
+      end
     end
   end
 end
